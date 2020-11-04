@@ -50,4 +50,20 @@ select * from emp where empno =7782;
 
 --부서번호가 30이고, 사원직책이 SALSEMAN  정보 조회 
 varchar 타입은 '' 사용 
-select * from emp where deptno=30 AND job='salesman';
+select * from emp where deptno=30 AND job='SALESMAN';
+-- 사원번호가 7499이고, 부서번호가 30인 정보 조회
+select * from emp where empno = 7499 AND deptno = 30;
+
+-- 부서번호가 30이거나, 사원직책이 CLERK 정보 조회
+select * from emp where deptno = 30 OR job = 'CLERK';
+-- 부서번호가 20이거나, 사원직책이 SALESMAN 정보 조회
+select * from emp where deptno = 20 OR job = 'SALESMAN';
+
+--연산자를 이용한 조회
+-- sal*12 한 금액이 36000인 데이터 조회
+select * from emp where sal*12 = 36000;
+-- 관계연산자 : >, <, >= , <=
+select * from emp where sal> 3000;
+select * from emp where sal> =3000;
+select * from emp where ename >= 'F';
+
