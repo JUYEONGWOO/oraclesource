@@ -281,9 +281,15 @@ select empno,ename,job,sal,DECODE(job,
 from emp;
 
 select empno,ename,job,sal,case job
-                            when    'MANAGER' then SAL*1.1
-                            when      'SALESMAN' then SAL*1.05
-                             when     'ANALYST' then SAL
-                              else    SAL*1.03
-                              end as UPSAL
+                                 when 'MANAGER' then SAL*1.1
+                                 when 'SALESMAN' then SAL*1.05
+                                 when 'ANALYST' then SAL
+                                 else SAL*1.03
+                                 end as UPSAL
 from emp;
+
+select empno,ename,job,sal,case 
+                                when comm is null then '해당사항없음'
+                                when comm = 0 then '수당없음'
+                                when comm > 0 then '수당 : ' || comm
+                                end as comm_text from emp;
