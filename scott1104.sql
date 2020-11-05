@@ -240,3 +240,50 @@ select to_char(sysdate, 'day') as 현재날짜 from dual;
 select to_char(sysdate, 'HH:mi;ss') as 현재날짜 from dual;
 select to_char(sysdate, 'HH12:mi;ss') as 현재날짜 from dual;
 select to_char(sysdate, 'HH24:mi;ss') as 현재날짜 from dual;
+select to_char(sysdate, 'HH24:mi;ss pm') as 현재날짜 from dual;
+
+-- 오늘날짜를 년/월/일 16:51:45 표현
+
+select to_char(sysdate,'yyyy/mm/dd hh24:mi;ss ') as 현재날짜시간 from dual;
+
+select 1300-to_number('1500'), to_number('1300')+1500 from dual;
+select to_number('3,000,001' , '9,999,999')-to_number('3,000,001' , '9,999,999') from dual;
+SELECT sal,to_char(sal, '$999,999') sal_$,
+        to_char(sal, '$999,999') sal_$,
+        to_char(sal, 'L999,999') sal_1,
+        to_char(sal, '$999,999.00') sal_2,
+        to_char(sal, '000,999,999.00') sal_3,
+        to_char(sal, '999,999.00') sal_4
+from emp;
+
+select to_date('2020-11-05','yyyy/mm/dd') as todate1,
+        to_date('20201105', 'yyyy-mm-dd') as todate2 from dual;
+        
+-- 1981년6월1일 이후에 입사한 사원정보 조회
+select * from emp where hiredate > to_date('1981-06-01','yyyy-mm-dd');
+
+select to_date('2019-12-20')-to_date('2019-10-20') from dual;
+
+-- 널처리 함수 : NVL, NVL2
+SELECT empno, ename, sal, comm, sal+comm, nvl(comm,0), sal+nvl(comm,0)
+from emp;
+
+SELECT empno, ename, sal, comm, sal+comm, nvl2(comm,'O','X'), nvl2(comm,sal*12+12+comm,sal*12) as annsal
+from emp;
+
+-- DECODE함수와 CASE문 
+--job 가 manager, salesman, analyst 경우에 각각의 다른 비율을 적용하고 싶다면 ?
+select empno,ename,job,sal,DECODE(job, 
+                                  'MANAGER', SAL*1.1,
+                                  'SALESMAN',SAL*1.05,
+                                  'ANALYST', SAL,
+                                  SAL*1.03) as UPSAL
+from emp;
+
+select empno,ename,job,sal,case job
+                            when    'MANAGER' then SAL*1.1
+                            when      'SALESMAN' then SAL*1.05
+                             when     'ANALYST' then SAL
+                              else    SAL*1.03
+                              end as UPSAL
+from emp;
